@@ -3,7 +3,7 @@
 > **Note:** This project was mostly AI-generated and is still a work in progress. It is not ready for production use.
 
 <p align="center">
-    <img alt="GitHub Workflow Status (with branch)" src="https://img.shields.io/github/actions/workflow/status/spillgebees/netex-csharp-model/build-and-test.yml?branch=main&label=build%20%26%20test&style=for-the-badge" />
+    <img alt="GitHub Workflow Status (with branch)" src="https://img.shields.io/github/actions/workflow/status/spillgebees/netex/build-and-test.yml?branch=main&label=build%20%26%20test&style=for-the-badge" />
 </p>
 
 C# model classes and a generator tool for [NeTEx](https://github.com/NeTEx-CEN/NeTEx) (Network Timetable Exchange) XSD schemas, for use in .NET applications.
