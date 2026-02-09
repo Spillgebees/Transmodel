@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Spillgebees.NeTEx.Generator/Spillgebees.NeTEx.Generator.csproj" />
+    <Project Path="src/Spillgebees.NeTEx.Models/Spillgebees.NeTEx.Models.csproj" />
+    <Project Path="src/Spillgebees.NeTEx.Models.Tests/Spillgebees.NeTEx.Models.Tests.csproj" />
+  </Folder>
+
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+    <File Path="src/.editorconfig" />
+    <File Path="src/General.targets" />
+    <File Path="src/Directory.Packages.props" />
+    <File Path="src/global.json" />
+  </Folder>
+</Solution>

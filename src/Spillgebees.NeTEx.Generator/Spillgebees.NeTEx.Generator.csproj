@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../General.targets" />
+
+  <PropertyGroup>
+    <!-- Tool targets only the latest TFM -->
+    <TargetFrameworks>net10.0</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+
+    <!-- dotnet tool packaging -->
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>netex-generate</ToolCommandName>
+
+    <!-- NuGet metadata -->
+    <Authors>Jason Rebelo Neves (igotinfected)</Authors>
+    <Company>Spillgebees</Company>
+    <Description>CLI tool for generating C# model classes from NeTEx (Network Timetable Exchange) XSD schemas. Downloads schemas from the official NeTEx-CEN repository and generates modern C# code using XmlSchemaClassGenerator.</Description>
+    <PackageTags>netex;siri;public-transport;xml;schema;code-generation;dotnet-tool</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>spillgebees.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../assets/spillgebees.png" Pack="true" PackagePath="" />
+    <None Include="../../README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="XmlSchemaClassGenerator-beta" />
+    <PackageReference Include="System.CommandLine" />
+  </ItemGroup>
+</Project>

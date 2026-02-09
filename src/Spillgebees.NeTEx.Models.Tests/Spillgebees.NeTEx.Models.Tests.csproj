@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../General.targets" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TUnit" />
+    <PackageReference Include="AwesomeAssertions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Spillgebees.NeTEx.Models/Spillgebees.NeTEx.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TestData/**/*" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
