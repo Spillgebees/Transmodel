@@ -50,6 +50,7 @@ public static class CodeGenerator
             // Collections
             CollectionSettersMode = CollectionSettersMode.Init,
             CollectionType = typeof(List<>),
+            EnumCollection = true,
 
             // Minimal attribute noise
             GenerateSerializableAttribute = false,
@@ -58,9 +59,6 @@ public static class CodeGenerator
             GenerateDescriptionAttribute = false,
             GenerateCommandLineArgumentsComment = false,
             CreateGeneratedCodeAttributeVersion = false,
-
-            // Enum collections
-            EnumCollection = true,
 
             // Structure
             EmitOrder = true,
