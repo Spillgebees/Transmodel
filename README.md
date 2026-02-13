@@ -1,19 +1,85 @@
-# Spillgebees.NeTEx
+# Spillgebees.Transmodel
 
 <p align="center">
-    <img alt="GitHub Workflow Status (with branch)" src="https://img.shields.io/github/actions/workflow/status/spillgebees/netex/build-and-test.yml?branch=main&label=build%20%26%20test&style=for-the-badge" />
+    <img alt="GitHub Workflow Status (with branch)" src="https://img.shields.io/github/actions/workflow/status/spillgebees/transmodel/build-and-test.yml?branch=main&label=build%20%26%20test&style=for-the-badge" />
+    <img alt="License" src="https://img.shields.io/github/license/spillgebees/transmodel?style=for-the-badge" />
 </p>
 
-C# model classes and a generator tool for [NeTEx](https://github.com/NeTEx-CEN/NeTEx) (Network Timetable Exchange) XSD schemas, for use in .NET applications.
+Strongly-typed C# XML bindings for [Transmodel](https://transmodel-cen.eu/)-based European public transport standards. Currently, covers [NeTEx](https://github.com/NeTEx-CEN/NeTEx) (Network Timetable Exchange) and [SIRI](https://github.com/SIRI-CEN/SIRI) (Service Interface for Real-time Information), with the flexibility to support additional Transmodel-based standards.
 
-This repository provides two things:
+Generated from the official CEN XSD schemas and verified with automated tests.
 
-- **Pre-generated model packages** -- strongly-typed C# classes for each NeTEx schema version (as [tagged in the NeTEx-CEN/NeTEx repository](https://github.com/NeTEx-CEN/NeTEx/tags)), ready to use with `XmlSerializer`.
-- **A generator tool** -- a CLI (`netex-generate`) that downloads NeTEx XSD schemas and generates C# classes with custom namespaces, for when you need full control.
+> **Note:** This project was developed with significant AI assistance. While it is functional and tested, it has not yet undergone a full manual review. Treat it as pre-production. Cntributions and feedback are welcome.
 
-## Model packages
+## Generator tool
 
-Install only the NeTEx version you need. Versions correspond to [tags in the NeTEx-CEN/NeTEx GitHub repository](https://github.com/NeTEx-CEN/NeTEx/tags).
+A CLI tool that downloads XSD schemas from the official CEN repositories and generates modern C# XML bindings with the latest features. Use it to generate bindings for any schema version, including unreleased branches or specific commits.
+
+| Package                              |                                                                                    NuGet                                                                                    |
+|--------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| `Spillgebees.Transmodel.Generator`   |      [![NuGet](https://img.shields.io/nuget/vpre/Spillgebees.Transmodel.Generator?logo=nuget&label=)](https://www.nuget.org/packages/Spillgebees.Transmodel.Generator)      |
+
+```bash
+dotnet tool install -g Spillgebees.Transmodel.Generator
+```
+
+### NeTEx generation
+
+```bash
+transmodel-generator generate-netex --version v1.3.1 --output ./Generated --namespace MyApp.NeTEx
+```
+
+Generates XML bindings with the following sub-namespaces:
+
+| Sub-namespace       | XML Namespace                    | Description                            |
+|---------------------|----------------------------------|----------------------------------------|
+| `MyApp.NeTEx.NeTEx` | `http://www.netex.org.uk/netex`  | NeTEx types                            |
+| `MyApp.NeTEx.SIRI`  | `http://www.siri.org.uk/siri`    | SIRI types (subset bundled with NeTEx) |
+| `MyApp.NeTEx.GML`   | `http://www.opengis.net/gml/3.2` | GML types (geographic markup)          |
+
+### SIRI generation
+
+```bash
+transmodel-generator generate-siri --version v2.2 --output ./Generated --namespace MyApp.SIRI
+```
+
+Generates XML bindings with the following sub-namespaces:
+
+| Sub-namespace       | XML Namespace                          | Description                   |
+|---------------------|----------------------------------------|-------------------------------|
+| `MyApp.SIRI.SIRI`   | `http://www.siri.org.uk/siri`          | Core SIRI types               |
+| `MyApp.SIRI.IFOPT`  | `http://www.ifopt.org.uk/ifopt`        | IFOPT types                   |
+| `MyApp.SIRI.ACSB`   | `http://www.ifopt.org.uk/acsb`         | Accessibility types           |
+| `MyApp.SIRI.DATEX2` | `http://datex2.eu/schema/2_0RC1/2_0`   | DATEX2 types                  |
+| `MyApp.SIRI.WSDL`   | `http://wsdl.siri.org.uk`              | WSDL/SOAP types               |
+| `MyApp.SIRI.GML`    | `http://www.opengis.net/gml/3.2`       | GML types (geographic markup) |
+| `MyApp.SIRI.W3`     | `http://www.w3.org/XML/1998/namespace` | W3 types                      |
+
+### CLI reference
+
+```
+transmodel-generator generate-netex [options]
+transmodel-generator generate-siri  [options]
+
+Options:
+  -v, --version <version>      Schema version tag (default: v1.3.1 for NeTEx, v2.2 for SIRI)
+  --ref <ref>                  Git ref (branch or commit SHA), mutually exclusive with --version
+  -o, --output <output>        Output directory for generated C# files (default: ./Generated)
+  -n, --namespace <namespace>  Root C# namespace (default: NeTEx.Models / SIRI.Models)
+  --clean                      Delete output directory before generating
+  --verbose                    Enable verbose logging
+
+transmodel-generator list-netex-versions   List available NeTEx version tags
+transmodel-generator list-siri-versions    List available SIRI version tags
+```
+
+## Pre-generated packages
+
+If you don't need custom generation, install one of the pre-generated packages below. These are built with the same generator, tested, and published to NuGet for every release.
+
+### NeTEx
+
+Versions correspond to [tags in the NeTEx-CEN/NeTEx GitHub repository](https://github.com/NeTEx-CEN/NeTEx/tags).
 
 |                      NeTEx version                       | Package                           |                                                                              NuGet                                                                              |
 |:--------------------------------------------------------:|-----------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------:|
@@ -24,87 +90,115 @@ Install only the NeTEx version you need. Versions correspond to [tags in the NeT
 | [v1.3.1](https://github.com/NeTEx-CEN/NeTEx/tree/v1.3.1) | `Spillgebees.NeTEx.Models.V1_3_1` | [![NuGet](https://img.shields.io/nuget/vpre/Spillgebees.NeTEx.Models.V1_3_1?logo=nuget&label=)](https://www.nuget.org/packages/Spillgebees.NeTEx.Models.V1_3_1) |
 |                       All versions                       | `Spillgebees.NeTEx.Models`        |        [![NuGet](https://img.shields.io/nuget/vpre/Spillgebees.NeTEx.Models?logo=nuget&label=)](https://www.nuget.org/packages/Spillgebees.NeTEx.Models)        |
 
-## Generator tool
-
-| Package                       |                                                                          NuGet                                                                          |
-|-------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| `Spillgebees.NeTEx.Generator` | [![NuGet](https://img.shields.io/nuget/vpre/Spillgebees.NeTEx.Generator?logo=nuget&label=)](https://www.nuget.org/packages/Spillgebees.NeTEx.Generator) |
-
-## Quick start
-
-### Using the pre-generated models
-
 ```bash
-# Install a single version
 dotnet add package Spillgebees.NeTEx.Models.V1_3_1
-
-# Or install all versions at once
-dotnet add package Spillgebees.NeTEx.Models
 ```
 
-Each version package contains three sub-namespaces:
+Each NeTEx version package contains three sub-namespaces:
 
-- `.NeTEx` -- NeTEx types (stop places, lines, journeys, fares, etc.)
-- `.SIRI` -- SIRI types (real-time information)
-- `.GML` -- GML types (geographic markup)
+| Sub-namespace | XML Namespace                    | Description                            |
+|---------------|----------------------------------|----------------------------------------|
+| `.NeTEx`      | `http://www.netex.org.uk/netex`  | NeTEx types                            |
+| `.SIRI`       | `http://www.siri.org.uk/siri`    | SIRI types (subset bundled with NeTEx) |
+| `.GML`        | `http://www.opengis.net/gml/3.2` | GML types (geographic markup)          |
 
 ```csharp
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 using Spillgebees.NeTEx.Models.V1_3_1.NeTEx;
-using Spillgebees.NeTEx.Models.V1_3_1.SIRI;
 
-var stopPlace = new StopPlace
+var delivery = new PublicationDeliveryStructure
 {
-    Id = "NSR:StopPlace:1234",
-    Version = "1",
+    PublicationTimestamp = DateTimeOffset.UtcNow,
+    ParticipantRef = "my-data-provider",
+    Description = new MultilingualString { Value = "Stop places export" },
 };
+
+var serializer = new XmlSerializer(typeof(PublicationDeliveryStructure));
+using var stream = new MemoryStream();
+using var xmlWriter = XmlWriter.Create(stream, new XmlWriterSettings
+{
+    Encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false),
+    Indent = true,
+});
+serializer.Serialize(xmlWriter, delivery);
+
+// <?xml version="1.0" encoding="utf-8"?>
+// <PublicationDelivery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ...>
+//   <PublicationTimestamp>2026-02-13T12:00:00+00:00</PublicationTimestamp>
+//   <ParticipantRef>my-data-provider</ParticipantRef>
+//   <Description>Stop places export</Description>
+// </PublicationDelivery>
 ```
 
-### Using the generator tool
+### SIRI
 
-Install the tool globally:
+Versions correspond to [tags in the SIRI-CEN/SIRI GitHub repository](https://github.com/SIRI-CEN/SIRI/tags).
+
+|                    SIRI version                    | Package                        |                                                                           NuGet                                                                           |
+|:--------------------------------------------------:|--------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| [v2.1](https://github.com/SIRI-CEN/SIRI/tree/v2.1) | `Spillgebees.SIRI.Models.V2_1` | [![NuGet](https://img.shields.io/nuget/vpre/Spillgebees.SIRI.Models.V2_1?logo=nuget&label=)](https://www.nuget.org/packages/Spillgebees.SIRI.Models.V2_1) |
+| [v2.2](https://github.com/SIRI-CEN/SIRI/tree/v2.2) | `Spillgebees.SIRI.Models.V2_2` | [![NuGet](https://img.shields.io/nuget/vpre/Spillgebees.SIRI.Models.V2_2?logo=nuget&label=)](https://www.nuget.org/packages/Spillgebees.SIRI.Models.V2_2) |
+|                    All versions                    | `Spillgebees.SIRI.Models`      |      [![NuGet](https://img.shields.io/nuget/vpre/Spillgebees.SIRI.Models?logo=nuget&label=)](https://www.nuget.org/packages/Spillgebees.SIRI.Models)      |
 
 ```bash
-dotnet tool install -g Spillgebees.NeTEx.Generator
+dotnet add package Spillgebees.SIRI.Models.V2_2
 ```
 
-Generate models for a specific [NeTEx-CEN/NeTEx](https://github.com/NeTEx-CEN/NeTEx) version tag:
+Each SIRI version package contains seven sub-namespaces:
 
-```bash
-netex-generate generate --version v1.3.1 --output ./Generated --namespace MyApp.NeTEx
-```
+| Sub-namespace | XML Namespace                          | Description                   |
+|---------------|----------------------------------------|-------------------------------|
+| `.SIRI`       | `http://www.siri.org.uk/siri`          | SIRI types                    |
+| `.IFOPT`      | `http://www.ifopt.org.uk/ifopt`        | IFOPT types                   |
+| `.ACSB`       | `http://www.ifopt.org.uk/acsb`         | Accessibility types           |
+| `.DATEX2`     | `http://datex2.eu/schema/2_0RC1/2_0`   | DATEX2 types                  |
+| `.WSDL`       | `http://wsdl.siri.org.uk`              | WSDL/SOAP types               |
+| `.GML`        | `http://www.opengis.net/gml/3.2`       | GML types (geographic markup) |
+| `.W3`         | `http://www.w3.org/XML/1998/namespace` | W3 types                      |
 
-This downloads the NeTEx schemas from the official repository and generates C# classes with the following sub-namespaces:
+```csharp
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
+using Spillgebees.SIRI.Models.V2_2.SIRI;
 
-- `MyApp.NeTEx.NeTEx` -- NeTEx types
-- `MyApp.NeTEx.SIRI` -- SIRI types
-- `MyApp.NeTEx.GML` -- GML types
+var siri = new Siri
+{
+    ServiceDelivery = new ServiceDelivery
+    {
+        ResponseTimestamp = DateTimeOffset.UtcNow,
+    },
+};
 
-#### Generator CLI reference
+var serializer = new XmlSerializer(typeof(Siri));
+using var stream = new MemoryStream();
+using var xmlWriter = XmlWriter.Create(stream, new XmlWriterSettings
+{
+    Encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false),
+    Indent = true,
+});
+serializer.Serialize(xmlWriter, siri);
 
-```
-netex-generate generate [options]
-
-Options:
-  -v, --version <version>      NeTEx-CEN/NeTEx version tag (default: v1.3.1)
-  --ref <ref>                  Git ref (branch or commit SHA), mutually exclusive with --version
-  -o, --output <output>        Output directory for generated C# files (default: ./Generated)
-  -n, --namespace <namespace>  Root C# namespace (default: NeTEx.Models)
-  --clean                      Delete output directory before generating
-  --verbose                    Enable verbose logging
-
-netex-generate list-versions   List available NeTEx-CEN/NeTEx version tags
+// <?xml version="1.0" encoding="utf-8"?>
+// <Siri xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ...>
+//   <ServiceDelivery>
+//     <ResponseTimestamp>2026-02-13T12:00:00+00:00</ResponseTimestamp>
+//   </ServiceDelivery>
+// </Siri>
 ```
 
 ## Building from source
 
-The generated model classes are **not committed** to the repository -- they are generated automatically at build time. To build locally:
+The generated bindings are **not committed** to the repository, they are generated at build time. To build locally:
 
 ```bash
-dotnet build Spillgebees.NeTEx.Models.slnx --configuration Release
-dotnet test Spillgebees.NeTEx.Models.slnx --configuration Release
+dotnet build Spillgebees.Transmodel.slnx --configuration Release
+dotnet test --solution Spillgebees.Transmodel.slnx --configuration Release
 ```
 
-The build will automatically download the NeTEx XSD schemas from GitHub, generate the C# classes, and compile them. Downloaded schemas are cached in local app data (`netex-schemas/`) so subsequent builds don't require network access.
+The build downloads the XSD schemas from GitHub, generates the XML bindings, and compiles them. Downloaded schemas are cached in local app data so subsequent builds don't require network access.
 
 Use `dotnet clean` to remove the generated files and trigger a fresh generation on the next build.
 
@@ -116,4 +210,4 @@ Use `dotnet clean` to remove the generated files and trigger a fresh generation 
 
 This project is licensed under the [European Union Public Licence v. 1.2 (EUPL-1.2)](LICENSE).
 
-The NeTEx schemas are licensed under [GPL-3.0](https://github.com/NeTEx-CEN/NeTEx/blob/master/LICENSE) by CEN. EUPL-1.2 is [compatible](https://joinup.ec.europa.eu/collection/eupl/matrix-eupl-compatible-open-source-licences) with GPL-3.0 per its compatibility clause.
+The NeTEx schemas are licensed under [GPL-3.0](https://github.com/NeTEx-CEN/NeTEx/blob/master/LICENSE) by CEN. EUPL-1.2 is [compatible](https://joinup.ec.europa.eu/collection/eupl/matrix-eupl-compatible-open-source-licences) with GPL-3.0 per its compatibility clause. The SIRI schemas are published by CEN on the [SIRI-CEN/SIRI](https://github.com/SIRI-CEN/SIRI) repository without an explicit open-source license.

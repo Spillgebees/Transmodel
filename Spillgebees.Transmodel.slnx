@@ -1,0 +1,34 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+    <File Path="global.json" />
+    <File Path="src/.editorconfig" />
+    <File Path="src/General.targets" />
+    <File Path="src/netex/NeTEx.Models.targets" />
+    <File Path="src/siri/SIRI.Models.targets" />
+    <File Path="src/Directory.Packages.props" />
+  </Folder>
+
+  <Folder Name="/src/generator/">
+    <Project Path="src/generator/Spillgebees.Transmodel.Generator/Spillgebees.Transmodel.Generator.csproj" />
+  </Folder>
+
+  <Folder Name="/src/netex/">
+    <Project Path="src/netex/Spillgebees.NeTEx.Models/Spillgebees.NeTEx.Models.csproj" />
+    <Project Path="src/netex/Spillgebees.NeTEx.Models.V1_2/Spillgebees.NeTEx.Models.V1_2.csproj" />
+    <Project Path="src/netex/Spillgebees.NeTEx.Models.V1_2_2/Spillgebees.NeTEx.Models.V1_2_2.csproj" />
+    <Project Path="src/netex/Spillgebees.NeTEx.Models.V1_2_3/Spillgebees.NeTEx.Models.V1_2_3.csproj" />
+    <Project Path="src/netex/Spillgebees.NeTEx.Models.V1_3_0/Spillgebees.NeTEx.Models.V1_3_0.csproj" />
+    <Project Path="src/netex/Spillgebees.NeTEx.Models.V1_3_1/Spillgebees.NeTEx.Models.V1_3_1.csproj" />
+    <Project Path="src/netex/Spillgebees.NeTEx.Models.Tests/Spillgebees.NeTEx.Models.Tests.csproj" />
+  </Folder>
+
+  <Folder Name="/src/siri/">
+    <Project Path="src/siri/Spillgebees.SIRI.Models/Spillgebees.SIRI.Models.csproj" />
+    <Project Path="src/siri/Spillgebees.SIRI.Models.V2_1/Spillgebees.SIRI.Models.V2_1.csproj" />
+    <Project Path="src/siri/Spillgebees.SIRI.Models.V2_2/Spillgebees.SIRI.Models.V2_2.csproj" />
+    <Project Path="src/siri/Spillgebees.SIRI.Models.Tests/Spillgebees.SIRI.Models.Tests.csproj" />
+  </Folder>
+</Solution>
