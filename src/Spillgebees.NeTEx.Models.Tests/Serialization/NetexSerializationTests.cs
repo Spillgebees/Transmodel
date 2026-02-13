@@ -92,9 +92,12 @@ public class NetexSerializationTests
         {
             Id = "ORG:Operator:1",
             Version = "1",
+            OrganisationType =
+            [
+                OrganisationTypeEnumeration.Operator,
+                OrganisationTypeEnumeration.Authority
+            ]
         };
-        organisation.OrganisationType!.Add(OrganisationTypeEnumeration.Operator);
-        organisation.OrganisationType.Add(OrganisationTypeEnumeration.Authority);
 
         // act
         using var writer = new StringWriter();
@@ -104,13 +107,16 @@ public class NetexSerializationTests
         using var reader = new StringReader(xml);
         var deserialized = serializer.Deserialize(reader) as Organisation;
 
-        // assert — xsd:list types serialize as a single element with space-separated values
+        // assert
+        // xsd:list types serialize as a single element with space-separated values
+        // instead of multiple elements of the same name
         xml.Should().Contain("<OrganisationType>operator authority</OrganisationType>");
         xml.Should().NotContain("<OrganisationType>operator</OrganisationType>");
+        xml.Should().NotContain("<OrganisationType>authority</OrganisationType>");
 
         deserialized.Should().NotBeNull();
-        deserialized!.OrganisationType.Should().HaveCount(2);
-        deserialized.OrganisationType![0].Should().Be(OrganisationTypeEnumeration.Operator);
+        deserialized.OrganisationType.Should().HaveCount(2);
+        deserialized.OrganisationType[0].Should().Be(OrganisationTypeEnumeration.Operator);
         deserialized.OrganisationType[1].Should().Be(OrganisationTypeEnumeration.Authority);
     }
 
@@ -123,9 +129,12 @@ public class NetexSerializationTests
         {
             Id = "PRK:Parking:1",
             Version = "1",
+            ParkingPaymentProcess =
+            [
+                ParkingPaymentProcessEnumeration.PayAndDisplay,
+                ParkingPaymentProcessEnumeration.PayByMobileDevice
+            ]
         };
-        parking.ParkingPaymentProcess!.Add(ParkingPaymentProcessEnumeration.PayAndDisplay);
-        parking.ParkingPaymentProcess.Add(ParkingPaymentProcessEnumeration.PayByMobileDevice);
 
         // act
         using var writer = new StringWriter();
@@ -135,14 +144,48 @@ public class NetexSerializationTests
         using var reader = new StringReader(xml);
         var deserialized = serializer.Deserialize(reader) as Parking;
 
-        // assert — xsd:list types serialize as a single element with space-separated values
+        // assert
+        // xsd:list types serialize as a single element with space-separated values
+        // instead of multiple elements of the same name
         xml.Should().Contain("<ParkingPaymentProcess>payAndDisplay payByMobileDevice</ParkingPaymentProcess>");
         xml.Should().NotContain("<ParkingPaymentProcess>payAndDisplay</ParkingPaymentProcess>");
+        xml.Should().NotContain("<ParkingPaymentProcess>payByMobileDevice</ParkingPaymentProcess>");
 
         deserialized.Should().NotBeNull();
-        deserialized!.ParkingPaymentProcess.Should().HaveCount(2);
-        deserialized.ParkingPaymentProcess![0].Should().Be(ParkingPaymentProcessEnumeration.PayAndDisplay);
+        deserialized.ParkingPaymentProcess.Should().HaveCount(2);
+        deserialized.ParkingPaymentProcess[0].Should().Be(ParkingPaymentProcessEnumeration.PayAndDisplay);
         deserialized.ParkingPaymentProcess[1].Should().Be(ParkingPaymentProcessEnumeration.PayByMobileDevice);
+    }
+
+
+
+    [Test]
+    public void Should_serialize_and_deserialize_optional_element_with_default_value_to_nullable_property_with_fallback_default()
+    {
+        // arrange
+        // accessVehicleEquipment is a subclass of EquipmentVersionStructure,
+        // which has an optional Note with a default value of "false." in the xsd
+        var serializer = new XmlSerializer(typeof(AccessVehicleEquipment));
+        var stopPlace = new AccessVehicleEquipment
+        {
+            Id = "NSR:AccessVehicleEquipment:1",
+            Version = "1"
+        };
+
+        // act
+        using var writer = new StringWriter();
+        serializer.Serialize(writer, stopPlace);
+        var xml = writer.ToString();
+
+        using var reader = new StringReader(xml);
+        var deserialized = serializer.Deserialize(reader) as AccessVehicleEquipment;
+
+        // assert
+        xml.Should().Contain("<AccessVehicleEquipment ");
+        xml.Should().Contain("<Note>false.</Note>");
+        deserialized.Should().NotBeNull();
+        deserialized.Note.Should().NotBeNull();
+        deserialized.Note.Value.Should().Be("false.");
     }
 
     [Test]
