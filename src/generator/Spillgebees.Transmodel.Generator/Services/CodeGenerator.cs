@@ -143,10 +143,11 @@ public static class CodeGenerator
             CollectionType = typeof(List<>),
             EnumCollection = true,
 
-            // Nullable and required
+            // Nullable, required, and choice groups
             EnableNullableDirective = true,
             GenerateRequiredModifier = true,
             UseShouldSerializePattern = true,
+            GenerateChoiceGroupAttributes = true,
 
             // Minimal attribute noise
             GenerateSerializableAttribute = false,
