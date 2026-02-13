@@ -1,9 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="../General.targets" />
-  <Import Project="../Models.targets" />
-
-  <PropertyGroup>
-    <NetexVersion>v1.2.2</NetexVersion>
-    <Description>Pre-generated C# model classes for NeTEx (Network Timetable Exchange) $(NetexVersion) and associated SIRI/GML schemas.</Description>
-  </PropertyGroup>
-</Project>

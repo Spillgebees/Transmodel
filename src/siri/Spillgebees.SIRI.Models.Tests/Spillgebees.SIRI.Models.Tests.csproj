@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../General.targets" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TUnit" />
+    <PackageReference Include="AwesomeAssertions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Spillgebees.SIRI.Models.V2_1/Spillgebees.SIRI.Models.V2_1.csproj" />
+    <ProjectReference Include="../Spillgebees.SIRI.Models.V2_2/Spillgebees.SIRI.Models.V2_2.csproj" />
+  </ItemGroup>
+</Project>

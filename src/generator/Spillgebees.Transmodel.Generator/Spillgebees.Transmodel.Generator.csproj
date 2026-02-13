@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../General.targets" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+
+    <!-- dotnet tool packaging -->
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>transmodel-generator</ToolCommandName>
+
+    <!-- NuGet metadata -->
+    <Authors>Jason Rebelo Neves (igotinfected)</Authors>
+    <Company>Spillgebees</Company>
+    <Description>CLI tool for generating C# model classes from NeTEx (Network Timetable Exchange) and SIRI (Service Interface for Real-time Information) XSD schemas. Downloads schemas from the official NeTEx-CEN and SIRI-CEN repositories and generates modern C# code using XmlSchemaClassGenerator.</Description>
+    <PackageTags>netex;siri;public-transport;xml;schema;code-generation;dotnet-tool</PackageTags>
+    <PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
+    <PackageIcon>spillgebees.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/Spillgebees/Transmodel</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Spillgebees/Transmodel</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../../assets/spillgebees.png" Pack="true" PackagePath="" />
+    <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="XmlSchemaClassGenerator-beta" />
+    <PackageReference Include="System.CommandLine" />
+  </ItemGroup>
+</Project>

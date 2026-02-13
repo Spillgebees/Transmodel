@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../General.targets" />
+  <Import Project="../SIRI.Models.targets" />
+
+  <PropertyGroup>
+    <Description>Meta-package that includes pre-generated C# model classes for all official SIRI (Service Interface for Real-time Information) schema versions. Install this package to get models for every supported version, or install individual version packages for a smaller footprint.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Spillgebees.SIRI.Models.V2_1/Spillgebees.SIRI.Models.V2_1.csproj" />
+    <ProjectReference Include="../Spillgebees.SIRI.Models.V2_2/Spillgebees.SIRI.Models.V2_2.csproj" />
+  </ItemGroup>
+</Project>

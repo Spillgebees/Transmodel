@@ -29,21 +29,24 @@ jobs:
             packages/*.nupkg # TODO: remove once we move back to a stable xscgen package
 
       - name: build solution
-        run: dotnet build Spillgebees.NeTEx.Models.slnx --configuration Release
+        run: dotnet build Spillgebees.Transmodel.slnx --configuration Release
 
-      - name: test project
-        run: dotnet test --solution Spillgebees.NeTEx.Models.slnx --configuration Release --no-build --verbosity normal
+      - name: test projects
+        run: dotnet test --solution Spillgebees.Transmodel.slnx --configuration Release --no-build --verbosity normal
 
       - name: package NuGet packages
         if: inputs.should-package
         run: |
-          dotnet pack src/Spillgebees.NeTEx.Models.V1_2/Spillgebees.NeTEx.Models.V1_2.csproj --configuration Release --no-build --output package
-          dotnet pack src/Spillgebees.NeTEx.Models.V1_2_2/Spillgebees.NeTEx.Models.V1_2_2.csproj --configuration Release --no-build --output package
-          dotnet pack src/Spillgebees.NeTEx.Models.V1_2_3/Spillgebees.NeTEx.Models.V1_2_3.csproj --configuration Release --no-build --output package
-          dotnet pack src/Spillgebees.NeTEx.Models.V1_3_0/Spillgebees.NeTEx.Models.V1_3_0.csproj --configuration Release --no-build --output package
-          dotnet pack src/Spillgebees.NeTEx.Models.V1_3_1/Spillgebees.NeTEx.Models.V1_3_1.csproj --configuration Release --no-build --output package
-          dotnet pack src/Spillgebees.NeTEx.Models/Spillgebees.NeTEx.Models.csproj --configuration Release --no-build --output package
-          dotnet pack src/Spillgebees.NeTEx.Generator/Spillgebees.NeTEx.Generator.csproj --configuration Release --no-build --output package
+          dotnet pack src/netex/Spillgebees.NeTEx.Models.V1_2/Spillgebees.NeTEx.Models.V1_2.csproj --configuration Release --no-build --output package
+          dotnet pack src/netex/Spillgebees.NeTEx.Models.V1_2_2/Spillgebees.NeTEx.Models.V1_2_2.csproj --configuration Release --no-build --output package
+          dotnet pack src/netex/Spillgebees.NeTEx.Models.V1_2_3/Spillgebees.NeTEx.Models.V1_2_3.csproj --configuration Release --no-build --output package
+          dotnet pack src/netex/Spillgebees.NeTEx.Models.V1_3_0/Spillgebees.NeTEx.Models.V1_3_0.csproj --configuration Release --no-build --output package
+          dotnet pack src/netex/Spillgebees.NeTEx.Models.V1_3_1/Spillgebees.NeTEx.Models.V1_3_1.csproj --configuration Release --no-build --output package
+          dotnet pack src/netex/Spillgebees.NeTEx.Models/Spillgebees.NeTEx.Models.csproj --configuration Release --no-build --output package
+          dotnet pack src/siri/Spillgebees.SIRI.Models.V2_1/Spillgebees.SIRI.Models.V2_1.csproj --configuration Release --no-build --output package
+          dotnet pack src/siri/Spillgebees.SIRI.Models.V2_2/Spillgebees.SIRI.Models.V2_2.csproj --configuration Release --no-build --output package
+          dotnet pack src/siri/Spillgebees.SIRI.Models/Spillgebees.SIRI.Models.csproj --configuration Release --no-build --output package
+          dotnet pack src/generator/Spillgebees.Transmodel.Generator/Spillgebees.Transmodel.Generator.csproj --configuration Release --no-build --output package
 
       - name: upload artifacts
         if: inputs.should-package

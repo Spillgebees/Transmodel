@@ -24,14 +24,14 @@ jobs:
         with:
           filters: |
             changed:
-              - 'src/Spillgebees.NeTEx.Generator/**'
-              - 'src/Spillgebees.NeTEx.Models*/**'
+              - 'src/generator/**'
+              - 'src/netex/**'
+              - 'src/siri/**'
               - 'src/General.targets'
-              - 'src/Models.targets'
               - 'src/Directory.Packages.props'
               - 'packages/**'
               - 'global.json'
-              - 'Spillgebees.NeTEx.Models.slnx'
+              - 'Spillgebees.Transmodel.slnx'
 
   build-and-test:
     needs: [changes]

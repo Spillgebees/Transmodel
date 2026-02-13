@@ -413,8 +413,9 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp,visualstudio,rider,jetbrains
 
-# Generated NeTEx models (produced at build time by Spillgebees.NeTEx.Generator)
-src/Spillgebees.NeTEx.Models*/Generated/
+# Generated XML bindings (produced at build time by Spillgebees.Transmodel.Generator)
+src/netex/**/Generated/
+src/siri/**/Generated/
 
 # OpenCode
 .opencode/
