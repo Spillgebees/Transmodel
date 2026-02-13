@@ -29,7 +29,7 @@ jobs:
               - 'src/General.targets'
               - 'src/Models.targets'
               - 'src/Directory.Packages.props'
-              - 'packages/**' # TODO: remove once we move back to a stable xscgen package
+              - 'packages/**'
               - 'global.json'
               - 'Spillgebees.NeTEx.Models.slnx'
 
