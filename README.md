@@ -5,7 +5,7 @@
     <img alt="License" src="https://img.shields.io/github/license/spillgebees/transmodel?style=for-the-badge" />
 </p>
 
-Strongly-typed C# XML bindings for [Transmodel](https://transmodel-cen.eu/)-based European public transport standards. Currently covers [NeTEx](https://github.com/NeTEx-CEN/NeTEx) (Network Timetable Exchange) and [SIRI](https://github.com/SIRI-CEN/SIRI) (Service Interface for Real-time Information), with the flexibility to support additional Transmodel-based standards.
+Strongly-typed C# XML bindings for [Transmodel](https://transmodel-cen.eu/)-based European public transport standards. Currently, covers [NeTEx](https://github.com/NeTEx-CEN/NeTEx) (Network Timetable Exchange) and [SIRI](https://github.com/SIRI-CEN/SIRI) (Service Interface for Real-time Information), with the flexibility to support additional Transmodel-based standards.
 
 Generated from the official CEN XSD schemas and verified with automated tests.
 
@@ -13,11 +13,11 @@ Generated from the official CEN XSD schemas and verified with automated tests.
 
 ## Generator tool
 
-A CLI tool that downloads XSD schemas from the official CEN repositories and generates modern C# XML bindings with `#nullable enable`, C# 11 `required` modifiers, and the `ShouldSerialize` pattern. Use it to generate bindings for any schema version, including unreleased branches or specific commits.
+A CLI tool that downloads XSD schemas from the official CEN repositories and generates modern C# XML bindings with the latest features. Use it to generate bindings for any schema version, including unreleased branches or specific commits.
 
 | Package                              |                                                                                    NuGet                                                                                    |
 |--------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| `Spillgebees.Transmodel.Generator`   | [![NuGet](https://img.shields.io/nuget/vpre/Spillgebees.Transmodel.Generator?logo=nuget&label=)](https://www.nuget.org/packages/Spillgebees.Transmodel.Generator)           |
+| `Spillgebees.Transmodel.Generator`   |      [![NuGet](https://img.shields.io/nuget/vpre/Spillgebees.Transmodel.Generator?logo=nuget&label=)](https://www.nuget.org/packages/Spillgebees.Transmodel.Generator)      |
 
 ```bash
 dotnet tool install -g Spillgebees.Transmodel.Generator
@@ -31,11 +31,11 @@ transmodel-generator generate-netex --version v1.3.1 --output ./Generated --name
 
 Generates XML bindings with the following sub-namespaces:
 
-| Sub-namespace        | XML Namespace                    | Description                        |
-|----------------------|----------------------------------|------------------------------------|
-| `MyApp.NeTEx.NeTEx`  | `http://www.netex.org.uk/netex`  | NeTEx types                        |
-| `MyApp.NeTEx.SIRI`   | `http://www.siri.org.uk/siri`    | SIRI types (subset bundled with NeTEx) |
-| `MyApp.NeTEx.GML`    | `http://www.opengis.net/gml/3.2` | GML types (geographic markup)      |
+| Sub-namespace       | XML Namespace                    | Description                            |
+|---------------------|----------------------------------|----------------------------------------|
+| `MyApp.NeTEx.NeTEx` | `http://www.netex.org.uk/netex`  | NeTEx types                            |
+| `MyApp.NeTEx.SIRI`  | `http://www.siri.org.uk/siri`    | SIRI types (subset bundled with NeTEx) |
+| `MyApp.NeTEx.GML`   | `http://www.opengis.net/gml/3.2` | GML types (geographic markup)          |
 
 ### SIRI generation
 
@@ -50,7 +50,7 @@ Generates XML bindings with the following sub-namespaces:
 | `MyApp.SIRI.SIRI`   | `http://www.siri.org.uk/siri`          | Core SIRI types               |
 | `MyApp.SIRI.IFOPT`  | `http://www.ifopt.org.uk/ifopt`        | IFOPT types                   |
 | `MyApp.SIRI.ACSB`   | `http://www.ifopt.org.uk/acsb`         | Accessibility types           |
-| `MyApp.SIRI.DATEX2`  | `http://datex2.eu/schema/2_0RC1/2_0`   | DATEX2 types                  |
+| `MyApp.SIRI.DATEX2` | `http://datex2.eu/schema/2_0RC1/2_0`   | DATEX2 types                  |
 | `MyApp.SIRI.WSDL`   | `http://wsdl.siri.org.uk`              | WSDL/SOAP types               |
 | `MyApp.SIRI.GML`    | `http://www.opengis.net/gml/3.2`       | GML types (geographic markup) |
 | `MyApp.SIRI.W3`     | `http://www.w3.org/XML/1998/namespace` | W3 types                      |
@@ -136,11 +136,11 @@ serializer.Serialize(xmlWriter, delivery);
 
 Versions correspond to [tags in the SIRI-CEN/SIRI GitHub repository](https://github.com/SIRI-CEN/SIRI/tags).
 
-|                     SIRI version                      | Package                          |                                                                            NuGet                                                                             |
-|:-----------------------------------------------------:|----------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| [v2.1](https://github.com/SIRI-CEN/SIRI/tree/v2.1)   | `Spillgebees.SIRI.Models.V2_1`   | [![NuGet](https://img.shields.io/nuget/vpre/Spillgebees.SIRI.Models.V2_1?logo=nuget&label=)](https://www.nuget.org/packages/Spillgebees.SIRI.Models.V2_1)   |
-| [v2.2](https://github.com/SIRI-CEN/SIRI/tree/v2.2)   | `Spillgebees.SIRI.Models.V2_2`   | [![NuGet](https://img.shields.io/nuget/vpre/Spillgebees.SIRI.Models.V2_2?logo=nuget&label=)](https://www.nuget.org/packages/Spillgebees.SIRI.Models.V2_2)   |
-|                      All versions                     | `Spillgebees.SIRI.Models`        |      [![NuGet](https://img.shields.io/nuget/vpre/Spillgebees.SIRI.Models?logo=nuget&label=)](https://www.nuget.org/packages/Spillgebees.SIRI.Models)        |
+|                    SIRI version                    | Package                        |                                                                           NuGet                                                                           |
+|:--------------------------------------------------:|--------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| [v2.1](https://github.com/SIRI-CEN/SIRI/tree/v2.1) | `Spillgebees.SIRI.Models.V2_1` | [![NuGet](https://img.shields.io/nuget/vpre/Spillgebees.SIRI.Models.V2_1?logo=nuget&label=)](https://www.nuget.org/packages/Spillgebees.SIRI.Models.V2_1) |
+| [v2.2](https://github.com/SIRI-CEN/SIRI/tree/v2.2) | `Spillgebees.SIRI.Models.V2_2` | [![NuGet](https://img.shields.io/nuget/vpre/Spillgebees.SIRI.Models.V2_2?logo=nuget&label=)](https://www.nuget.org/packages/Spillgebees.SIRI.Models.V2_2) |
+|                    All versions                    | `Spillgebees.SIRI.Models`      |      [![NuGet](https://img.shields.io/nuget/vpre/Spillgebees.SIRI.Models?logo=nuget&label=)](https://www.nuget.org/packages/Spillgebees.SIRI.Models)      |
 
 ```bash
 dotnet add package Spillgebees.SIRI.Models.V2_2
