@@ -166,7 +166,7 @@ public class NetexSerializationTests
         // accessVehicleEquipment is a subclass of EquipmentVersionStructure,
         // which has an optional Note with a default value of "false." in the xsd
         var serializer = new XmlSerializer(typeof(AccessVehicleEquipment));
-        var stopPlace = new AccessVehicleEquipment
+        var accessVehicleEquipment = new AccessVehicleEquipment
         {
             Id = "NSR:AccessVehicleEquipment:1",
             Version = "1"
@@ -174,7 +174,7 @@ public class NetexSerializationTests
 
         // act
         using var writer = new StringWriter();
-        serializer.Serialize(writer, stopPlace);
+        serializer.Serialize(writer, accessVehicleEquipment);
         var xml = writer.ToString();
 
         using var reader = new StringReader(xml);
