@@ -12,8 +12,6 @@ namespace Spillgebees.SIRI.Models.Tests;
 /// </summary>
 public class ChoiceGroupAttributeTests
 {
-    // -- helpers ------------------------------------------------------------------
-
     private static XmlChoiceGroupAttribute? GetChoiceGroupAttribute<T>(string propertyName) =>
         typeof(T).GetProperty(propertyName)?
             .GetCustomAttribute<XmlChoiceGroupAttribute>();
@@ -24,8 +22,6 @@ public class ChoiceGroupAttributeTests
         attr.Should().NotBeNull($"property {typeof(T).Name}.{propertyName} should have [XmlChoiceGroupAttribute]");
         return attr!;
     }
-
-    // -- MonitoredCountingStructure: simple choice (Count vs Percentage) -----------
 
     [Test]
     public void Should_have_choice_group_attribute_on_monitored_counting_count()
@@ -55,8 +51,6 @@ public class ChoiceGroupAttributeTests
 
         countAttr.GroupId.Should().Be(percentageAttr.GroupId);
     }
-
-    // -- LocationStructure: sequence arm (Lon/Lat/Alt share arm, Coordinates is other) --
 
     [Test]
     public void Should_have_choice_group_attribute_on_location_longitude()
@@ -117,8 +111,6 @@ public class ChoiceGroupAttributeTests
         coordAttr.ArmId.Should().NotBe(lonAttr.ArmId);
     }
 
-    // -- PlannedStopAssignmentStructure: both arms are sequences -------------------
-
     [Test]
     public void Should_have_choice_group_attribute_on_planned_stop_assignment_quay_arm()
     {
@@ -162,8 +154,6 @@ public class ChoiceGroupAttributeTests
         quayRef.GroupId.Should().Be(bpRef.GroupId);
     }
 
-    // -- non-choice properties should NOT have the attribute -----------------------
-
     [Test]
     public void Should_not_have_choice_group_attribute_on_non_choice_property()
     {
@@ -181,8 +171,6 @@ public class ChoiceGroupAttributeTests
 
         attr.Should().BeNull();
     }
-
-    // -- ControlActionStructure: multiple choice groups in same type ---------------
 
     [Test]
     public void Should_have_multiple_distinct_choice_groups_on_control_action_structure()

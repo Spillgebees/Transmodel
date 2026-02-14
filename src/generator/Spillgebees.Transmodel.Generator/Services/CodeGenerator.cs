@@ -150,6 +150,8 @@ public static class CodeGenerator
             UseShouldSerializePattern = true,
             GenerateChoiceGroupAttributes = true,
             ChoiceGroupAttributeNamespace = rootNamespace,
+            GenerateStrictFixedValues = true,
+            GenerateStrictRangeBounds = true,
 
             // Minimal attribute noise
             GenerateSerializableAttribute = false,
