@@ -31,13 +31,11 @@ public class IfoptSerializationTests
         deserialized.Value.Should().Be("NSR:StopPlace:1234");
     }
 
-    // -- CountryRefStructure (enum base: CountryCodeType) --
-    // XmlSerializer cannot handle Nullable<enum> with [XmlText], so the generator
-    // must emit a non-nullable enum property. These tests verify that.
-
     [Test]
     public void Should_construct_xml_serializer_for_country_ref_structure()
     {
+        // XmlSerializer cannot handle Nullable<enum> with [XmlText], so the generator
+        // must emit a non-nullable enum property. This verifies that.
         var act = () => new XmlSerializer(typeof(CountryRefStructure));
 
         act.Should().NotThrow();
@@ -85,8 +83,6 @@ public class IfoptSerializationTests
         deserialized.Value.Should().Be(CountryCodeType.De);
     }
 
-    // -- AccessibilityStructure (enum base: AccessibilityEnumeration) --
-
     [Test]
     public void Should_construct_xml_serializer_for_accessibility_structure()
     {
@@ -118,8 +114,6 @@ public class IfoptSerializationTests
         deserialized.Value.Should().Be(AccessibilityEnumeration.True);
         xml.Should().Contain(">true<");
     }
-
-    // -- MeasureType (double base + required uom attribute) --
 
     [Test]
     public void Should_construct_xml_serializer_for_measure_type()

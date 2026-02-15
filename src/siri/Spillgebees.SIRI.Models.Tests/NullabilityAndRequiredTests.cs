@@ -14,8 +14,6 @@ namespace Spillgebees.SIRI.Models.Tests;
 /// </summary>
 public class NullabilityAndRequiredTests
 {
-    // -- behavioral: required properties ------------------------------------------
-
     [Test]
     public void Should_construct_key_value_with_required_properties()
     {
@@ -58,8 +56,6 @@ public class NullabilityAndRequiredTests
         assessment.MobilityImpairedAccess.Should().BeTrue();
     }
 
-    // -- behavioral: optional nullable properties ---------------------------------
-
     [Test]
     public void Should_allow_null_on_optional_reference_type_properties()
     {
@@ -91,8 +87,6 @@ public class NullabilityAndRequiredTests
         str.Lang.Should().BeNull();
     }
 
-    // -- behavioral: ShouldSerialize pattern for nullable value types --------------
-
     [Test]
     public void Should_serialize_nullable_value_type_when_set()
     {
@@ -121,8 +115,6 @@ public class NullabilityAndRequiredTests
         link.LinkContent.Should().BeNull();
         link.ShouldSerializeLinkContent().Should().BeFalse();
     }
-
-    // -- behavioral: collections --------------------------------------------------
 
     [Test]
     public void Should_initialize_collection_properties_via_constructor()
@@ -153,8 +145,6 @@ public class NullabilityAndRequiredTests
         delivery.ShouldSerializeEstimatedTimetableDelivery().Should().BeFalse();
     }
 
-    // -- behavioral: XmlSerializer bypasses required ------------------------------
-
     [Test]
     public void Should_round_trip_required_properties_via_xml_serializer()
     {
@@ -175,8 +165,6 @@ public class NullabilityAndRequiredTests
         result.Value.Should().Be("hello");
         result.Lang.Should().BeNull();
     }
-
-    // -- metadata: required modifier via reflection -------------------------------
 
     [Test]
     public void Should_have_required_modifier_on_key_value_key_property()
@@ -219,8 +207,6 @@ public class NullabilityAndRequiredTests
         // assert
         isRequired.Should().BeFalse();
     }
-
-    // -- metadata: nullable annotations via reflection ----------------------------
 
     [Test]
     public void Should_have_nullable_annotation_on_optional_reference_type_property()
@@ -268,8 +254,6 @@ public class NullabilityAndRequiredTests
         // assert
         info.WriteState.Should().Be(NullabilityState.Nullable);
     }
-
-    // -- metadata: #nullable enable directive -------------------------------------
 
     [Test]
     public void Should_have_nullable_context_enabled_on_generated_types()

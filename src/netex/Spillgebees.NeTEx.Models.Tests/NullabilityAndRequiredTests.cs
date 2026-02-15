@@ -16,8 +16,6 @@ namespace Spillgebees.NeTEx.Models.Tests;
 /// </summary>
 public class NullabilityAndRequiredTests
 {
-    // -- behavioral: required properties ------------------------------------------
-
     [Test]
     public void Should_construct_publication_delivery_with_required_properties()
     {
@@ -64,8 +62,6 @@ public class NullabilityAndRequiredTests
         str.Value.Should().Be("hello");
     }
 
-    // -- behavioral: optional nullable properties ---------------------------------
-
     [Test]
     public void Should_allow_null_on_optional_reference_type_properties()
     {
@@ -101,8 +97,6 @@ public class NullabilityAndRequiredTests
         str.Lang.Should().BeNull();
     }
 
-    // -- behavioral: XmlSerializer bypasses required ------------------------------
-
     [Test]
     public void Should_round_trip_required_properties_via_xml_serializer()
     {
@@ -125,8 +119,6 @@ public class NullabilityAndRequiredTests
         result.Lang.Should().BeNull();
     }
 
-    // -- behavioral: collections are not required ---------------------------------
-
     [Test]
     public void Should_allow_creating_organisation_without_setting_collection()
     {
@@ -141,8 +133,6 @@ public class NullabilityAndRequiredTests
         // assert — collection is initialized by the constructor
         org.OrganisationType.Should().NotBeNull();
     }
-
-    // -- metadata: required modifier via reflection -------------------------------
 
     [Test]
     public void Should_have_required_modifier_on_publication_timestamp()
@@ -246,8 +236,6 @@ public class NullabilityAndRequiredTests
         isRequired.Should().BeFalse();
     }
 
-    // -- metadata: nullable annotations via reflection ----------------------------
-
     [Test]
     public void Should_have_nullable_annotation_on_optional_reference_type_property()
     {
@@ -343,8 +331,6 @@ public class NullabilityAndRequiredTests
         info.WriteState.Should().Be(NullabilityState.NotNull);
         info.ReadState.Should().Be(NullabilityState.NotNull);
     }
-
-    // -- metadata: #nullable enable directive -------------------------------------
 
     [Test]
     public void Should_have_nullable_context_enabled_on_generated_types()

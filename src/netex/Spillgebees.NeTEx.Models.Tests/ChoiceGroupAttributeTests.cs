@@ -12,8 +12,6 @@ namespace Spillgebees.NeTEx.Models.Tests;
 /// </summary>
 public class ChoiceGroupAttributeTests
 {
-    // -- helpers ------------------------------------------------------------------
-
     private static XmlChoiceGroupAttribute? GetChoiceGroupAttribute<T>(string propertyName) =>
         typeof(T).GetProperty(propertyName)?
             .GetCustomAttribute<XmlChoiceGroupAttribute>();
@@ -24,8 +22,6 @@ public class ChoiceGroupAttributeTests
         attr.Should().NotBeNull($"property {typeof(T).Name}.{propertyName} should have [XmlChoiceGroupAttribute]");
         return attr!;
     }
-
-    // -- DistanceMatrixElementDerivedViewStructure: two parallel choice groups -----
 
     [Test]
     public void Should_have_choice_group_on_start_stop_point_ref()
@@ -104,8 +100,6 @@ public class ChoiceGroupAttributeTests
 
         attr.Should().BeNull();
     }
-
-    // -- FareStructureElementVersionStructure: multiple choice groups in NeTEx -----
 
     [Test]
     public void Should_have_multiple_distinct_choice_groups_on_fare_structure_element()
