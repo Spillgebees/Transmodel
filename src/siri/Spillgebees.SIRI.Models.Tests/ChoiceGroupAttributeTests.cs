@@ -13,10 +13,17 @@ namespace Spillgebees.SIRI.Models.Tests;
 /// </summary>
 public class ChoiceGroupAttributeTests
 {
-    private static XmlChoiceGroupAttribute? GetChoiceGroupAttribute<T>(string propertyName) =>
-        typeof(T).GetProperty(propertyName)?
+    private static XmlChoiceGroupAttribute? GetChoiceGroupAttribute<T>(string propertyName)
+    {
+        var attributes = typeof(T).GetProperty(propertyName)?
             .GetCustomAttributes<XmlChoiceGroupAttribute>()
-            .FirstOrDefault();
+            .ToList();
+
+        attributes?.Should().HaveCountLessThanOrEqualTo(1,
+            $"property {typeof(T).Name}.{propertyName} should not have multiple [XmlChoiceGroupAttribute] annotations");
+
+        return attributes?.SingleOrDefault();
+    }
 
     private static IReadOnlyList<XmlChoiceGroupAttribute> GetChoiceGroupAttributes<T>(string propertyName) =>
         typeof(T).GetProperty(propertyName)?
@@ -182,15 +189,18 @@ public class ChoiceGroupAttributeTests
     [Test]
     public void Should_have_multiple_distinct_choice_groups_on_control_action_structure()
     {
-        // ControlActionStructure has 5 choice groups — verify at least 2 are distinct
+        // arrange
         var properties = typeof(ControlActionStructure).GetProperties();
+
+        // act
         var choiceGroupIds = properties
             .SelectMany(p => p.GetCustomAttributes<XmlChoiceGroupAttribute>())
-            .Where(a => a is not null)
             .Select(a => a.GroupId)
             .Distinct()
             .ToList();
-        choiceGroupIds.Count.Should().BeGreaterThanOrEqualTo(2);
+
+        // assert
+        choiceGroupIds.Should().HaveCount(5);
     }
 
     [Test]
@@ -275,7 +285,7 @@ public class ChoiceGroupAttributeTests
         situationExchange.Single().ArmId.Should().NotBe(included.Single().ArmId);
         estimatedInner.GroupId.Should().Be(productionInner.GroupId);
         estimatedInner.ArmId.Should().NotBe(productionInner.ArmId);
-        production.Concat(estimated).Concat(situationExchange).Should().AllSatisfy(attribute =>
+        included.Concat(production).Concat(estimated).Concat(situationExchange).Should().AllSatisfy(attribute =>
             attribute.IsRequired.Should().BeTrue());
     }
 }
