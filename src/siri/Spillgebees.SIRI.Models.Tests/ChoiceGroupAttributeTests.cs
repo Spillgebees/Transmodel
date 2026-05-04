@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using AwesomeAssertions;
 using Spillgebees.SIRI.Models.V2_2;
 using Spillgebees.SIRI.Models.V2_2.SIRI;
@@ -14,7 +15,13 @@ public class ChoiceGroupAttributeTests
 {
     private static XmlChoiceGroupAttribute? GetChoiceGroupAttribute<T>(string propertyName) =>
         typeof(T).GetProperty(propertyName)?
-            .GetCustomAttribute<XmlChoiceGroupAttribute>();
+            .GetCustomAttributes<XmlChoiceGroupAttribute>()
+            .FirstOrDefault();
+
+    private static IReadOnlyList<XmlChoiceGroupAttribute> GetChoiceGroupAttributes<T>(string propertyName) =>
+        typeof(T).GetProperty(propertyName)?
+            .GetCustomAttributes<XmlChoiceGroupAttribute>()
+            .ToList() ?? [];
 
     private static XmlChoiceGroupAttribute GetRequiredChoiceGroupAttribute<T>(string propertyName)
     {
@@ -178,11 +185,97 @@ public class ChoiceGroupAttributeTests
         // ControlActionStructure has 5 choice groups — verify at least 2 are distinct
         var properties = typeof(ControlActionStructure).GetProperties();
         var choiceGroupIds = properties
-            .Select(p => p.GetCustomAttribute<XmlChoiceGroupAttribute>())
+            .SelectMany(p => p.GetCustomAttributes<XmlChoiceGroupAttribute>())
             .Where(a => a is not null)
-            .Select(a => a!.GroupId)
+            .Select(a => a.GroupId)
             .Distinct()
             .ToList();
         choiceGroupIds.Count.Should().BeGreaterThanOrEqualTo(2);
+    }
+
+    [Test]
+    public void Should_mark_tpeg_reason_arms_as_required_choice_group_without_required_members()
+    {
+        // arrange
+        var propertyNames = new[]
+        {
+            nameof(PtSituationBodyGroupSecondaryReasonsReason.AlertCause),
+            nameof(PtSituationBodyGroupSecondaryReasonsReason.UnknownReason),
+            nameof(PtSituationBodyGroupSecondaryReasonsReason.MiscellaneousReason),
+            nameof(PtSituationBodyGroupSecondaryReasonsReason.PersonnelReason),
+            nameof(PtSituationBodyGroupSecondaryReasonsReason.EquipmentReason),
+            nameof(PtSituationBodyGroupSecondaryReasonsReason.EnvironmentReason),
+            nameof(PtSituationBodyGroupSecondaryReasonsReason.UndefinedReason),
+        };
+
+        // act
+        var properties = propertyNames
+            .Select(name => typeof(PtSituationBodyGroupSecondaryReasonsReason).GetProperty(name)!)
+            .ToList();
+        var attributes = properties
+            .Select(property => property.GetCustomAttributes<XmlChoiceGroupAttribute>().Single())
+            .ToList();
+
+        // assert
+        properties.Should().AllSatisfy(property =>
+            property.IsDefined(typeof(RequiredMemberAttribute), inherit: false).Should().BeFalse());
+        attributes.Select(attribute => attribute.GroupId).Distinct().Should().ContainSingle();
+        attributes.Should().AllSatisfy(attribute => attribute.IsRequired.Should().BeTrue());
+        attributes.Select(attribute => attribute.ArmId).Distinct().Should().HaveCount(propertyNames.Length);
+    }
+
+    [Test]
+    public void Should_mark_optional_tpeg_sub_reason_choice_group_as_not_required()
+    {
+        // arrange
+        var propertyNames = new[]
+        {
+            nameof(PtSituationBodyGroupSecondaryReasonsReason.MiscellaneousSubReason),
+            nameof(PtSituationBodyGroupSecondaryReasonsReason.PersonnelSubReason),
+            nameof(PtSituationBodyGroupSecondaryReasonsReason.EquipmentSubReason),
+            nameof(PtSituationBodyGroupSecondaryReasonsReason.EnvironmentSubReason),
+        };
+
+        // act
+        var attributes = propertyNames
+            .Select(name => typeof(PtSituationBodyGroupSecondaryReasonsReason).GetProperty(name)!)
+            .Select(property => property.GetCustomAttributes<XmlChoiceGroupAttribute>().Single())
+            .ToList();
+
+        // assert
+        attributes.Select(attribute => attribute.GroupId).Distinct().Should().ContainSingle();
+        attributes.Should().AllSatisfy(attribute => attribute.IsRequired.Should().BeFalse());
+    }
+
+    [Test]
+    public void Should_keep_outer_and_inner_memberships_for_nested_service_delivery_choice()
+    {
+        // arrange
+        var included = GetChoiceGroupAttributes<ServiceDeliveryBodyStructure>(
+            nameof(ServiceDeliveryBodyStructure.IncludedSituationExchangeDelivery));
+        var production = GetChoiceGroupAttributes<ServiceDeliveryBodyStructure>(
+            nameof(ServiceDeliveryBodyStructure.ProductionTimetableDelivery));
+        var estimated = GetChoiceGroupAttributes<ServiceDeliveryBodyStructure>(
+            nameof(ServiceDeliveryBodyStructure.EstimatedTimetableDelivery));
+        var situationExchange = GetChoiceGroupAttributes<ServiceDeliveryBodyStructure>(
+            nameof(ServiceDeliveryBodyStructure.SituationExchangeDelivery));
+
+        // act
+        var outerGroupId = included.Single().GroupId;
+        var productionOuter = production.Single(attribute => attribute.GroupId == outerGroupId);
+        var productionInner = production.Single(attribute => attribute.GroupId != outerGroupId);
+        var estimatedInner = estimated.Single(attribute => attribute.GroupId != outerGroupId);
+
+        // assert
+        production.Should().HaveCount(2);
+        estimated.Should().HaveCount(2);
+        situationExchange.Should().ContainSingle();
+        productionOuter.ArmId.Should().Be(included.Single().ArmId);
+        situationExchange.Single().GroupId.Should().Be(outerGroupId);
+        situationExchange.Single().ArmId.Should().NotBe(included.Single().ArmId);
+        estimatedInner.GroupId.Should().Be(productionInner.GroupId);
+        estimatedInner.ArmId.Should().NotBe(productionInner.ArmId);
+        production.Concat(estimated).Concat(situationExchange).Should().AllSatisfy(attribute =>
+            attribute.IsRequired.Should().BeTrue());
     }
 }
