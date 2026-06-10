@@ -4,6 +4,8 @@ on:
   release:
     types: [published]
 
+permissions: {}
+
 jobs:
   build-and-test:
     uses: ./.github/workflows/build-test-publish.yml
@@ -19,6 +21,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           sparse-checkout: global.json
+          persist-credentials: false
 
       - uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5
         with:
