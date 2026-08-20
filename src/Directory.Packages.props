@@ -13,7 +13,7 @@
     <PackageVersion Include="System.CommandLine" Version="2.0.7" />
 
     <!-- Test dependencies -->
-    <PackageVersion Include="TUnit" Version="1.56.35" />
-    <PackageVersion Include="AwesomeAssertions" Version="9.4.0" />
+    <PackageVersion Include="TUnit" Version="1.65.38" />
+    <PackageVersion Include="AwesomeAssertions" Version="9.6.0" />
   </ItemGroup>
 </Project>
