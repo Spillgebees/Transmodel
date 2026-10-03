@@ -23,7 +23,7 @@ namespace Spillgebees.NeTEx.Models.Tests.Smoke;
 
 /// <summary>
 /// Smoke tests verifying that core types exist and have correct XML namespace metadata
-/// for each supported NeTEx version (tags from the NeTEx-CEN/NeTEx GitHub repository).
+/// for each supported NeTEx version (tags from the TransmodelEcosystem/NeTEx GitHub repository).
 /// </summary>
 public class VersionSmokeTests
 {

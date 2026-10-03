@@ -17,7 +17,7 @@ namespace Spillgebees.SIRI.Models.Tests.Smoke;
 
 /// <summary>
 /// Smoke tests verifying that core types exist and have correct XML namespace metadata
-/// for each supported SIRI version (tags from the SIRI-CEN/SIRI GitHub repository).
+/// for each supported SIRI version (tags from the TransmodelEcosystem/SIRI GitHub repository).
 /// </summary>
 public class VersionSmokeTests
 {

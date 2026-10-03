@@ -18,11 +18,11 @@ public static class SiriDefaults
     public const string WsdlSubNamespace = "WSDL";
 
     public const string GitHubArchiveUrlTemplate =
-        "https://github.com/SIRI-CEN/SIRI/archive/refs/tags/{0}.tar.gz";
+        "https://github.com/TransmodelEcosystem/SIRI/archive/refs/tags/{0}.tar.gz";
     public const string GitHubArchiveRefUrlTemplate =
-        "https://github.com/SIRI-CEN/SIRI/archive/{0}.tar.gz";
+        "https://github.com/TransmodelEcosystem/SIRI/archive/{0}.tar.gz";
     public const string GitHubApiTagsUrl =
-        "https://api.github.com/repos/SIRI-CEN/SIRI/tags";
+        "https://api.github.com/repos/TransmodelEcosystem/SIRI/tags";
 
     public const string MainSchemaFileName = "siri.xsd";
 
