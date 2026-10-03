@@ -187,6 +187,31 @@ public class SerializationTests
     }
 
     [Test]
+    [Arguments("changed")]
+    [Arguments("false.")]
+    public void Should_preserve_edits_to_the_contents_of_a_default_object(string text)
+    {
+        // arrange
+        var serializer = new XmlSerializer(typeof(AccessVehicleEquipment));
+        var equipment = new AccessVehicleEquipment
+        {
+            Id = "NSR:AccessVehicleEquipment:1",
+            Version = "1",
+        };
+
+        // act
+        equipment.Note!.Value = text;
+        using var writer = new StringWriter();
+        serializer.Serialize(writer, equipment);
+        using var reader = new StringReader(writer.ToString());
+        var result = (AccessVehicleEquipment)serializer.Deserialize(reader)!;
+
+        // assert
+        writer.ToString().Should().Contain($"<Note>{text}</Note>");
+        result.Note!.Value.Should().Be(text);
+    }
+
+    [Test]
     public void Should_serialize_simple_content_ref_as_self_closing_element_when_value_is_null()
     {
         // arrange

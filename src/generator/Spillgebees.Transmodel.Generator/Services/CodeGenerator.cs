@@ -148,6 +148,7 @@ public static class CodeGenerator
             EnableNullableDirective = true,
             GenerateRequiredModifier = true,
             UseShouldSerializePattern = true,
+            UseShouldSerializeForDefaultValues = true,
             GenerateChoiceGroupAttributes = true,
             ChoiceGroupAttributeNamespace = rootNamespace,
             GenerateStrictFixedValues = true,
