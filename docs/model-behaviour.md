@@ -62,5 +62,3 @@ XML token lists also use hidden serialization properties. For example, SIRI `v2.
 The analyzer checks selected construction patterns. It cannot prove that every object produces schema-valid XML. Empty collections, mutations through helpers, and relationships between separate conditional branches can exceed its analysis.
 
 Repeated choices allow different alternatives on separate repetitions. Some more complex repeated sequences cannot preserve their original interleaving in separate generated collections. Validate the XML against the applicable upstream XSD when that distinction matters to your exchange.
-
-For the upstream generator update, see the [migration guide](upstream-generator-migration.md).
