@@ -149,6 +149,7 @@ public static class CodeGenerator
             GenerateRequiredModifier = true,
             UseShouldSerializePattern = true,
             UseShouldSerializeForDefaultValues = true,
+            UseLegacyMixedTextPropertyName = true,
             GenerateChoiceGroupAttributes = true,
             ChoiceGroupAttributeNamespace = rootNamespace,
             GenerateStrictFixedValues = true,
