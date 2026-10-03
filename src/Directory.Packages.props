@@ -4,7 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- Build tooling -->
-    <PackageVersion Include="DotNet.ReproducibleBuilds" Version="2.0.2" />
+    <PackageVersion Include="DotNet.ReproducibleBuilds" Version="2.0.5" />
     <PackageVersion Include="MinVer" Version="7.0.0" />
 
     <!-- Generator dependencies -->
