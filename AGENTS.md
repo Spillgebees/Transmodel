@@ -53,11 +53,13 @@ src/
     Spillgebees.SIRI.Models/        Meta-package (all SIRI versions)
     Spillgebees.SIRI.Models.V2_1/   SIRI v2.1 bindings
     Spillgebees.SIRI.Models.V2_2/   SIRI v2.2 bindings
+    Spillgebees.SIRI.Models.V2_2_1/ SIRI v2.2.1 bindings
+    Spillgebees.SIRI.Models.V2_3/   SIRI v2.3 bindings
     Spillgebees.SIRI.Models.Tests/  Tests
   netex/
     NeTEx.Models.targets            NuGet metadata + build-time generation
     Spillgebees.NeTEx.Models/       Meta-package (all NeTEx versions)
-    Spillgebees.NeTEx.Models.V1_*/  Version-specific bindings (5 versions)
+    Spillgebees.NeTEx.Models.V*/    Version-specific NeTEx bindings
     Spillgebees.NeTEx.Models.Tests/ Tests
 ```
 
@@ -143,7 +145,7 @@ Test classes are plain `public class` with no base class or constructor injectio
 
 ## Tooling
 
-- **SDK**: .NET 10.0 (`global.json` pins `10.0.102`, rolls forward within feature band)
+- **SDK**: .NET 10.0 (`global.json` pins `10.0.401`, rolls forward to a later feature band when needed)
 - **Versioning**: MinVer (automatic from Git tags, no manual versions in csproj)
 - **Reproducible builds**: `DotNet.ReproducibleBuilds` package
 - **License**: EUPL-1.2
