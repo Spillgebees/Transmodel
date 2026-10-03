@@ -2,7 +2,7 @@ namespace Spillgebees.Transmodel.Generator.Configuration;
 
 public static class NetexDefaults
 {
-    public const string DefaultVersion = "v1.3.1";
+    public const string DefaultVersion = "v2.0.0";
     public const string DefaultNamespace = "NeTEx.Models";
 
     public const string NetexXmlNamespace = "http://www.netex.org.uk/netex";

@@ -2,7 +2,7 @@ namespace Spillgebees.Transmodel.Generator.Configuration;
 
 public static class SiriDefaults
 {
-    public const string DefaultVersion = "v2.2";
+    public const string DefaultVersion = "v2.3";
     public const string DefaultNamespace = "SIRI.Models";
 
     public const string SiriXmlNamespace = "http://www.siri.org.uk/siri";

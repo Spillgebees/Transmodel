@@ -14,5 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="../Spillgebees.SIRI.Models.V2_1/Spillgebees.SIRI.Models.V2_1.csproj" />
     <ProjectReference Include="../Spillgebees.SIRI.Models.V2_2/Spillgebees.SIRI.Models.V2_2.csproj" />
+    <ProjectReference Include="../Spillgebees.SIRI.Models.V2_2_1/Spillgebees.SIRI.Models.V2_2_1.csproj" />
+    <ProjectReference Include="../Spillgebees.SIRI.Models.V2_3/Spillgebees.SIRI.Models.V2_3.csproj" />
   </ItemGroup>
 </Project>
