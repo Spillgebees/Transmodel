@@ -12,11 +12,11 @@ public static class NetexDefaults
     public const string SiriSubNamespace = "SIRI";
 
     public const string GitHubArchiveUrlTemplate =
-        "https://github.com/NeTEx-CEN/NeTEx/archive/refs/tags/{0}.tar.gz";
+        "https://github.com/TransmodelEcosystem/NeTEx/archive/refs/tags/{0}.tar.gz";
     public const string GitHubArchiveRefUrlTemplate =
-        "https://github.com/NeTEx-CEN/NeTEx/archive/{0}.tar.gz";
+        "https://github.com/TransmodelEcosystem/NeTEx/archive/{0}.tar.gz";
     public const string GitHubApiTagsUrl =
-        "https://api.github.com/repos/NeTEx-CEN/NeTEx/tags";
+        "https://api.github.com/repos/TransmodelEcosystem/NeTEx/tags";
 
     public const string PublicationSchemaFileName = "NeTEx_publication.xsd";
     public const string SiriSchemaFileName = "NeTEx_siri.xsd";
