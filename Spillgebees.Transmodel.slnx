@@ -22,6 +22,7 @@
     <Project Path="src/netex/Spillgebees.NeTEx.Models.V1_2_3/Spillgebees.NeTEx.Models.V1_2_3.csproj" />
     <Project Path="src/netex/Spillgebees.NeTEx.Models.V1_3_0/Spillgebees.NeTEx.Models.V1_3_0.csproj" />
     <Project Path="src/netex/Spillgebees.NeTEx.Models.V1_3_1/Spillgebees.NeTEx.Models.V1_3_1.csproj" />
+    <Project Path="src/netex/Spillgebees.NeTEx.Models.V1_3_2/Spillgebees.NeTEx.Models.V1_3_2.csproj" />
     <Project Path="src/netex/Spillgebees.NeTEx.Models.V2_0_0/Spillgebees.NeTEx.Models.V2_0_0.csproj" />
     <Project Path="src/netex/Spillgebees.NeTEx.Models.Tests/Spillgebees.NeTEx.Models.Tests.csproj" />
   </Folder>
@@ -30,6 +31,8 @@
     <Project Path="src/siri/Spillgebees.SIRI.Models/Spillgebees.SIRI.Models.csproj" />
     <Project Path="src/siri/Spillgebees.SIRI.Models.V2_1/Spillgebees.SIRI.Models.V2_1.csproj" />
     <Project Path="src/siri/Spillgebees.SIRI.Models.V2_2/Spillgebees.SIRI.Models.V2_2.csproj" />
+    <Project Path="src/siri/Spillgebees.SIRI.Models.V2_2_1/Spillgebees.SIRI.Models.V2_2_1.csproj" />
+    <Project Path="src/siri/Spillgebees.SIRI.Models.V2_3/Spillgebees.SIRI.Models.V2_3.csproj" />
     <Project Path="src/siri/Spillgebees.SIRI.Models.Tests/Spillgebees.SIRI.Models.Tests.csproj" />
   </Folder>
 </Solution>
