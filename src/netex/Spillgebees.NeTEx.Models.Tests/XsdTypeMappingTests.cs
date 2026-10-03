@@ -118,7 +118,7 @@ public class XsdTypeMappingTests
     }
 
     [Test]
-    public void Should_still_have_default_value_attribute_on_value_type_property_with_xsd_default()
+    public void Should_track_assignment_instead_of_omitting_explicit_default_values()
     {
         // arrange
         var property = typeof(DayTypeAssignmentVersionStructure)
@@ -128,8 +128,8 @@ public class XsdTypeMappingTests
         var attr = property.GetCustomAttribute<DefaultValueAttribute>();
 
         // assert
-        attr.Should().NotBeNull();
-        attr!.Value.Should().Be(true);
+        attr.Should().BeNull();
+        property.DeclaringType!.GetMethod("ShouldSerialize" + property.Name).Should().NotBeNull();
     }
 
     [Test]
